@@ -7,7 +7,7 @@ switch (_mode) do {
 		_pos = getPos player;
 		
 		if (_launchMode == "fromMap") then {
-			"DrPredatorMapHint" cutText ["<t font='PuristaBold' size='2'>SELECT POSITION ON A MAP</t>", "PLAIN DOWN", 1, true, true];
+			"DrPredatorMapHint" cutText ["<t font='PuristaBold' size='2'>SELECT POSITION ON THE MAP</t>", "PLAIN DOWN", 1, true, true];
 			_mapEH = addMissionEventHandler ["MapSingleClick",{
 				DrPredatorMapPos = _this # 1;
 			}];
@@ -101,6 +101,7 @@ switch (_mode) do {
 			sleep 0.01;
 		};
 		player setVariable ["isThermal",nil];
+		player setVariable ["isZoom",nil];
 		"RscNoise" cutrsc ["RscNoise","black"]; 
 		false setCamUseTI 1;
 		PPEffectDestroy [DrPredatorPP_chrom, DrPredatorPP_colorC, DrPredatorPP_film];
