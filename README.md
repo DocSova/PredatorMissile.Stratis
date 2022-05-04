@@ -4,3 +4,4 @@
 This repository contains a mission with **predator missile script** showcase for **ArmA 3** game.
 You can feel free to use, modify and reupload this script.
 
+Made on 2.08 ArmA 3 version.

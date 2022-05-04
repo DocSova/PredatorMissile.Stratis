@@ -55,11 +55,15 @@ switch (_mode) do {
 
 		DrLastMousePosition = ["0","0"];
 
-
-		_keyUpEH = (findDisplay 46) displayAddEventHandler ["KeyUp",{
-			_key = _this # 1;
-			
-			if (_key == 49) then {
+		_mouseClickEH = (findDisplay 46) displayAddEventHandler ["MouseButtonUp",{
+			if ((_this # 1) == 1) then {
+				_bool = !(player getVariable ["isZoom",false]);
+				DrPredatorCamera camSetFov ([0.2,0.7] select _bool);
+				player setVariable ["isZoom",_bool];
+			};
+		}];
+		_keyUpEH = (findDisplay 46) displayAddEventHandler ["KeyUp",{	
+			if ((_this # 1) == 49) then {
 				_bool = !(player getVariable ["isThermal",false]);
 				_bool setCamUseTI 1;
 				player setVariable ["isThermal",_bool];
@@ -81,10 +85,10 @@ switch (_mode) do {
 			DrPredatorMissile setVelocityModelSpace [(_vel # 0) + _dirX,_vel # 1,(_vel # 2) + _dirY];
 		}];
 		
-		["Proceed",[_mouseMovingEH, _keyUpEH]] spawn Dr_fnc_Predator;
+		["Proceed",[_mouseMovingEH, _keyUpEH, _mouseClickEH]] spawn Dr_fnc_Predator;
 	};
 	case "Proceed": {
-		_params params ["_mmEH", "_keyUpEH"];
+		_params params ["_mmEH", "_keyUpEH", "_mouseClickEH"];
 		_display 		= uiNamespace getVariable ["DrPredatorScreen",displayNull];
 		_coordControl 	= _display displayCtrl 1102;
 		_textFormat 	= "<t align='left' font='EtelkaMonospaceProBold' size='0.7'>%1 %2 %3<br />%4 : %5<br />0 13004 [0x0000045]</t>";
@@ -110,6 +114,7 @@ switch (_mode) do {
 		//cleaning
 		(findDisplay 46) displayRemoveEventHandler ["MouseMoving",_mmEH];
 		(findDisplay 46) displayRemoveEventHandler ["KeyUp",_keyUpEH];
+		(findDisplay 46) displayRemoveEventHandler ["MouseButtonUp",_mouseClickEH];
 		DrPredatorCamera = nil;
 		DrPredatorPP_chrom = nil;
 		DrPredatorPP_colorC = nil;

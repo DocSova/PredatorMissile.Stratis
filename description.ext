@@ -120,6 +120,15 @@ class RscTitles {
 				h = 3.5 * Dr_COEF_H;
 				colorBackground[] = {-1,-1,-1,0};
 			};
+			class Hiint: RscStructuredTextUI
+			{
+				idc = 1103;
+				text = "<t align='left' font='EtelkaMonospaceProBold' size='0.7'><t color=""#ffd804"">RMB</t> - Toggle Zoom<br /><t color=""#ffd804"">N</t> - Toggle Thermal<t>"; //--- ToDo: Localize;
+				x = 4 * Dr_COEF_W + Dr_COEF_X;
+				y = 21.5 * Dr_COEF_H + Dr_COEF_Y;
+				w = 7.35417 * Dr_COEF_W;
+				h = 1.5625 * Dr_COEF_H;
+			};
 		};
 	};
 };
